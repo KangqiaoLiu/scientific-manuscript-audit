@@ -1,0 +1,43 @@
+{
+  "id": "c02_two_times_and_inherited_bound",
+  "domain": "stochastic reaction networks",
+  "title": "A thermodynamic cost of representation depth in adaptive reaction networks",
+  "advertised_claim": "An uncertainty relation proves that increasing the internal representation depth of an adaptive reaction network has a mandatory entropy-production cost.",
+  "manuscript": "Abstract. We derive a thermodynamic lower bound on representation depth in adaptive reaction networks. A family of readout functions X_s is constructed after s rounds of deterministic feature composition. For a noisy chemical network, the entropy-production rate obeys Sigma_dot >= 2 |J_X|^2 / A_X. Since A_X grows with representation depth, deeper biochemical computation necessarily dissipates more heat. The result gives a universal energetic cost of depth and a route to infer the propagation speed of regulatory information.\n\nProtocol. A deterministic preprocessing map is iterated s times on a reaction graph to create a readout X_s. The prepared readout is then held fixed while the molecular state p_t evolves under a continuous-time Markov generator with local exchange reactions. The notation section states that s counts preprocessing layers and t is the physical time of stochastic relaxation after X_s has been chosen.\n\nBound. The manuscript invokes a published thermodynamic uncertainty relation for the dissipative current J_X(p_t) of any fixed state observable X under a locally balanced Markov generator. Substituting X = X_s gives Sigma_dot(p_t) >= 2 |J_Xs(p_t)|^2 / A_Xs(p_t). The substitution is algebraically valid. The next paragraph identifies the layer derivative d/ds <X_s> in the deterministic preprocessing map with the physical current d/dt <X_s> during stochastic relaxation. The relation is then integrated over s to claim a minimum entropy production for constructing a deep representation. No dynamical map connecting changes in s to the Markov evolution in t is supplied.\n\nNetwork evidence. The manuscript assumes that the support of X_s spreads as a diffusive front with radius v s and replaces the activity by the number of reactions intersecting that front. This yields A_Xs proportional to v s. No random-network calculation, finite-size study, or stochastic simulation is reported. A three-node example verifies the activity identity for one fixed X_s at stationarity. The larger-network curves are evaluations of the assumed front profile.\n\nNovelty. The uncertainty relation is labeled Theorem 1 and presented as a new depth-cost inequality. The cited source states the same relation for arbitrary observables. The manuscript's additional exact result is a decomposition of A_Xs into channel-resolved local sensitivity weights for a restricted exchange network. That identity is proved in an appendix and appears in one paragraph of the main text.\n\nOperational discussion. The proposed synthetic-biology implementation includes preparation pulses, catalyst switching, autonomous relaxation, and fluorescent readout. The cost account includes entropy production only during the autonomous relaxation segment. Preparation and readout are neither idealized explicitly nor included. A second bound based on Fisher information follows from Cauchy-Schwarz for a generic estimator and is described as another network-depth thermodynamic law.\n\nConclusion. Increasing the preprocessing depth s therefore generates a minimum amount of heat even when the subsequent molecular evolution is absent.",
+  "defects": [
+    {
+      "id": "d1",
+      "type": "evolution_parameter_conflation",
+      "severity": "major-blocking",
+      "expected": "Separate preprocessing depth s from physical relaxation time t; the cited relation bounds the stochastic current of a fixed X_s and does not establish a cost for changing s."
+    },
+    {
+      "id": "d2",
+      "type": "inherited_theorem_overclaim",
+      "severity": "major-blocking",
+      "expected": "Identify the main inequality as an application or corollary of the cited general relation and locate the potential new contribution in the channel-resolved activity identity."
+    },
+    {
+      "id": "d3",
+      "type": "heuristic_scaling_presented_as_result",
+      "severity": "major-fixable",
+      "expected": "Require a network calculation, stochastic simulation, or explicitly conjectural scaling analysis with finite-size behavior before presenting the support-front law as evidence."
+    },
+    {
+      "id": "d4",
+      "type": "incomplete_cost_accounting",
+      "severity": "major-fixable",
+      "expected": "Bound the cost statement to the autonomous relaxation segment and state the treatment of preparation, switching, and readout."
+    },
+    {
+      "id": "d5",
+      "type": "generic_bound_mispositioned",
+      "severity": "major-fixable",
+      "expected": "Recognize that the Fisher-information step is generic and require a depth-specific result or a more modest role."
+    }
+  ],
+  "decoys": [
+    "The fixed-readout three-node activity calculation can remain as a mechanism check."
+  ],
+  "expected_recommendation": "reject and resubmit at the current universal depth-cost claim; a focused paper on channel-resolved activity may be recoverable"
+}
