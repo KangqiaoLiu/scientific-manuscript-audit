@@ -5,7 +5,7 @@
 English | [简体中文](README.zh-CN.md) | [日本語](README.ja.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v0.1.0--rc.2-orange.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.1.0--rc.3-orange.svg)](CHANGELOG.md)
 [![Validation](https://github.com/KangqiaoLiu/scientific-manuscript-audit/actions/workflows/validate.yml/badge.svg)](.github/workflows/validate.yml)
 
 Scientific Manuscript Audit helps authors and research teams examine manuscripts before submission or revision. It produces referee-style reports organized around claim burden, inspected evidence, defect recoverability, bounded resolutions, and coherent publication recommendations.
@@ -63,13 +63,14 @@ mkdir -p .agents/skills
 cp -R skills/scientific-manuscript-audit .agents/skills/
 ```
 
-### Claude Code
+### Claude Code CLI
 
-Register the repository as a plugin marketplace and install the skill:
+In a Claude Code CLI session, register the repository as a plugin marketplace, install the skill, and reload plugins:
 
 ```text
 /plugin marketplace add KangqiaoLiu/scientific-manuscript-audit
 /plugin install scientific-manuscript-audit@scientific-manuscript-audit
+/reload-plugins
 ```
 
 A manual user-level installation can use:
