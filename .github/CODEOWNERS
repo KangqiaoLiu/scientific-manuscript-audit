@@ -1,0 +1,15 @@
+# Default ownership
+* @KangqiaoLiu
+
+# Security-sensitive and release-critical paths
+/.github/workflows/ @KangqiaoLiu
+/.github/dependabot.yml @KangqiaoLiu
+/scripts/ @KangqiaoLiu
+/skills/ @KangqiaoLiu
+/dist/ @KangqiaoLiu
+/evals/ @KangqiaoLiu
+/SECURITY.md @KangqiaoLiu
+/RESPONSIBLE_USE.md @KangqiaoLiu
+/TRADEMARKS.md @KangqiaoLiu
+/LICENSE @KangqiaoLiu
+/NOTICE @KangqiaoLiu
