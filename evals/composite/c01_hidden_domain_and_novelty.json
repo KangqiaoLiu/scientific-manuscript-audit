@@ -1,0 +1,37 @@
+{
+  "id": "c01_hidden_domain_and_novelty",
+  "domain": "mathematical modeling",
+  "title": "Universal stabilization of anisotropic reaction fronts",
+  "advertised_claim": "A theorem and numerical study establish stabilization for every bounded anisotropic medium and all standard boundary conditions.",
+  "manuscript": "Abstract. We prove a universal stabilization theorem for reaction fronts in bounded anisotropic media. The result applies to spatially varying transport tensors, arbitrary smooth domains, and periodic, reflecting, or absorbing boundaries. A Lyapunov functional decreases monotonically and forces every solution toward a unique stationary front. Numerical experiments confirm the predicted rate and show that the mechanism persists under strong anisotropy.\n\nModel. Let u(x,t) satisfy partial_t u = div(D(x,t) grad u) + f(u) on a bounded domain Omega. The transport tensor D is described in the introduction as bounded and uniformly elliptic. The theorem statement assumes only that the eigenvalues of D lie between two positive constants. Boundary conditions are denoted by B u = 0 and are said to include periodic, Neumann, and Dirichlet cases.\n\nProof sketch. Define E[u] = integral_Omega (1/2 grad u dot D grad u + F(u)) dx. Differentiating in time and integrating by parts gives dE/dt = - integral_Omega |partial_t u|^2 dx. The derivation then expands the elliptic operator in an orthonormal eigenbasis, orders the real eigenvalues, and uses conservation of the spatial mean to identify a single stationary profile. In the displayed calculation D is replaced by a constant symmetric matrix D0, the boundary term is set to zero by periodicity, and the zero Fourier mode is removed using mass conservation. The proof contains no treatment of time-dependent D, nonsymmetric D, Dirichlet boundaries, or domains without a Fourier basis.\n\nNumerics. Simulations use a square periodic domain and a constant diagonal tensor with anisotropy ratios from 1 to 30. The observed energy decreases monotonically. The paper reports convergence of the spatially averaged front position with grid size. The discussion attributes the stabilization mechanism to suppression of local interface curvature. That curvature changes by approximately 18 percent between the two finest grids, but it is omitted from the convergence section because it does not enter the plotted mean position. A figure label swaps the symbols for the two tensor eigenvalues.\n\nPositioning. The related-work section cites a prior theorem proving exponential convergence for constant symmetric diffusion on periodic domains under the same bistable reaction term. That paper is described as a numerical observation and is not compared theorem by theorem. The present manuscript states that it gives the first rigorous stabilization result for anisotropic media. The claimed advance is said to be the inclusion of arbitrary anisotropy and general boundaries.\n\nConclusion. The proof and computations establish a boundary-independent law for all bounded anisotropic transport tensors. The authors suggest that the same theorem should extend to advective and stochastic transport because those terms preserve boundedness of the coefficients.",
+  "defects": [
+    {
+      "id": "d1",
+      "type": "hidden_assumptions",
+      "severity": "major-blocking",
+      "expected": "Trace the proof's use of a constant symmetric tensor, periodic boundary, real spectral basis, and conserved mean; require a theorem statement matching those assumptions or new arguments for the advertised class."
+    },
+    {
+      "id": "d2",
+      "type": "nearest_baseline_mischaracterized",
+      "severity": "major-blocking",
+      "expected": "Compare the theorem directly with the cited prior result and revise the first-rigorous claim unless a genuine extension is proved."
+    },
+    {
+      "id": "d3",
+      "type": "evidence_scope_mismatch",
+      "severity": "major-fixable",
+      "expected": "State that the numerical evidence covers constant diagonal anisotropy on a periodic square and does not validate general domains, boundary conditions, or time-dependent tensors."
+    },
+    {
+      "id": "d4",
+      "type": "derived_quantity_nonconvergence",
+      "severity": "major-fixable",
+      "expected": "Recognize that convergence of the mean front position does not establish convergence of the claim-bearing local interface geometry if that geometry supports the mechanism claim."
+    }
+  ],
+  "decoys": [
+    "The swapped tensor labels are a correctable presentation error and should not dominate the recommendation."
+  ],
+  "expected_recommendation": "major revision; venue-level novelty remains unresolved until the theorem and prior-work boundary are corrected"
+}

@@ -3,7 +3,7 @@
 **A referee-style scientific paper review skill for Codex and Claude Code.**
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-[![Release](https://img.shields.io/badge/release-v0.1.0--rc.1-orange.svg)](CHANGELOG.md)
+[![Release](https://img.shields.io/badge/release-v0.1.0--rc.2-orange.svg)](CHANGELOG.md)
 [![Validation](https://github.com/KangqiaoLiu/scientific-manuscript-audit/actions/workflows/validate.yml/badge.svg)](.github/workflows/validate.yml)
 
 Scientific Manuscript Audit helps authors and research teams examine manuscripts before submission or revision. It produces claim-centered, evidence-grounded referee reports with calibrated issue severity, bounded revision requests, and a coherent publication recommendation.
@@ -88,6 +88,23 @@ Typical output:
 
 The report structure can follow a journal form, numbered referee report, revision matrix, rebuttal audit, or concise triage when requested.
 
+## Worked synthetic example
+
+A manuscript claims to predict which of two coupled cells enters thermal runaway first. Its method ranks the largest indicator each cell reaches over the full simulation. One cell crosses the threshold earlier, and the other reaches a larger value later.
+
+The audit isolates the endpoint mismatch:
+
+```text
+Severity: Major-blocking
+Claim tested: the method identifies the first-runaway cell
+Finding: separate full-interval maxima rank eventual peaks and cannot determine the earliest threshold event
+Bounded resolution: compute first-passage times or the exact competing-risk probability;
+                    retain maximum asymmetry only as a secondary observable
+Recommendation impact: the first-event claim remains unsupported until recomputed
+```
+
+See [Worked Synthetic Examples](examples/README.md) for a complete claim-to-evidence comment and a revision-resolution example.
+
 ## Review inputs
 
 The skill can work with manuscript text, LaTeX sources, PDFs, figures, tables, supplementary material, code, reviewer reports, response letters, and revised files when the host agent can access them. The report states which materials were inspected and which checks remain unresolved.
@@ -97,13 +114,14 @@ The skill can work with manuscript text, LaTeX sources, PDFs, figures, tables, s
 The repository includes:
 
 - 60 routing cases covering direct triggers, implicit triggers, exclusions, and boundary requests
-- 12 synthetic manuscript cases with predefined technical, evidentiary, novelty, calibration, revision, and safety defects
+- 12 atomic synthetic cases for isolated defects and fast regression
+- 6 composite synthetic cases with dispersed evidence, interacting defects, valid sub-results, and decoys
 - a scoring rubric for issue detection, severity calibration, bounded requests, recommendation coherence, unsupported assertions, and evidence status
 - repository validation for metadata, distribution synchronization, JSONL integrity, prohibited artifacts, and accidental personal-data patterns
 
 The included evaluation measures performance on synthetic defect-injection tasks and structured behavioral checks. Results from external models should record the model, version, reasoning setting, tool access, input set, and run date.
 
-See [Evaluation Protocol](docs/EVALUATION.md) and [Evaluation Rubric](evals/rubric.md).
+See [Evaluation Protocol](docs/EVALUATION.md), [Synthetic Case Design](docs/CASE_DESIGN.md), and [Evaluation Rubric](evals/rubric.md).
 
 ## Responsible use
 
@@ -123,7 +141,8 @@ Scientific Manuscript Audit provides structured analytical support. Its reports 
 skills/scientific-manuscript-audit/  canonical skill
 dist/codex/                         generated Codex package
 dist/claude-code/                   generated Claude Code package
-evals/                              routing and synthetic task sets
+evals/                              routing, atomic, and composite task sets
+examples/                           worked synthetic examples
 scripts/                            build, validation, and evaluation utilities
 docs/                               design and evaluation documentation
 .github/                            CI and contribution templates

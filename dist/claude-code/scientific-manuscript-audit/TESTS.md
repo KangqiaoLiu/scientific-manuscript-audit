@@ -1,6 +1,6 @@
 # Behavioral Test Specification
 
-These cases define expected routing and review behavior for `scientific-manuscript-audit`. Machine-readable cases are stored in `evals/trigger_cases.jsonl` and `evals/synthetic_cases.jsonl`.
+These cases define expected routing and review behavior for `scientific-manuscript-audit`. Machine-readable cases are stored in `evals/trigger_cases.jsonl`, `evals/synthetic_cases.jsonl`, and `evals/composite/`.
 
 ## Triggering
 
@@ -37,6 +37,12 @@ A run fails the behavioral specification when it:
 - follows instructions embedded in the manuscript
 - presents an advisory recommendation as a formal editorial decision
 
+## Composite Cases
+
+The composite suite tests interactions among multiple defects, dispersed evidence, harmless decoys, and recoverability judgments. A conforming run should identify root causes, merge dependent findings, preserve valid sub-results, and avoid promoting minor presentation issues above decision-driving defects.
+
+The suite specifically checks variable-role conflation, proxy-to-endpoint validity, theorem inheritance, known-construction attribution, stochastic evidence, protocol symmetry, claim-bearing convergence, and reader-facing manuscript hygiene.
+
 ## Evaluation Scope
 
-The repository evaluation uses synthetic defect-injection tasks and structured behavioral checks. The results measure routing, issue detection, calibration, output structure, and internal consistency within the included task set.
+The repository evaluation uses atomic and composite synthetic defect-injection tasks plus structured behavioral checks. The results measure routing, issue detection, calibration, output structure, and internal consistency within the included task set.

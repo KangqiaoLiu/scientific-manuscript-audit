@@ -1,0 +1,44 @@
+{
+  "id": "c05_single_seed_synergy_and_internal_notes",
+  "domain": "machine learning for microscopy",
+  "title": "Universal loss-decoder synergy for cell-boundary segmentation",
+  "advertised_claim": "A new loss universally improves late segmentation decoders and establishes a state-of-the-art system.",
+  "manuscript": "Abstract. We introduce a topology-aware quality loss for cell-boundary segmentation and demonstrate universal positive synergy with late decoder modules. Across 24 configurations, the best system improves the validation score from 0.812 to 0.818 and establishes a new state of the art on the MicroBoundary benchmark.\n\nExperimental design. Twelve decoder modules are each trained once with the stock loss and once with the proposed loss. All runs use seed 17. Hyperparameters for the new loss were selected after inspecting the same validation scores used to rank the decoders. The best pair consists of an externally published fusion module and the proposed loss. The manuscript reports the best checkpoint from each run. No repeated-seed mean, variance, or confidence interval is available.\n\nControls. The results include the stock network with stock loss, several decoders with stock loss, and all decoders with the proposed loss. They omit the stock network with the proposed loss. For the winning decoder, the text compares decoder-plus-new-loss with the stock network and calls the difference a loss-decoder interaction. The decoder with stock loss already accounts for most of the margin, and no factorial interaction contrast is calculated.\n\nExternal comparison. The state-of-the-art table combines results obtained with different image resolutions and train-test partitions. Two stronger recent systems are discussed in the introduction and excluded from the table because their protocols differ. They are not reproduced under the stated recipe. The winning fusion module is named by acronym, while its primary paper is absent from the references.\n\nClaim discipline. One subsection reports that the effect is architecture-dependent and that several decoders perform worse with the new loss. The abstract and conclusion call the improvement universal. The results say the winner is confirmed, while a later table lists required three-seed runs for the stock network, the loss-only control, the winning external module, and a self-designed module. Those runs are pending.\n\nManuscript hygiene. The source contains a section titled Author-side notes for the final rewrite. It instructs the authors to remove abandoned model branches, retain two favorable modules, insert a missing citation later, and improve the architecture graphic if time permits. A project nickname, run-completion counter, local configuration identifier, and a sentence saying that the document supersedes an older roadmap appear on the title page.\n\nPositive evidence. The current training recipe is documented, all 24 exploratory runs are reproducible, and negative interactions are reported. The proposed loss has a coherent task-level motivation.\n\nConclusion. Universal synergy and state-of-the-art superiority are described as established.",
+  "defects": [
+    {
+      "id": "d1",
+      "type": "stochastic_evidence_insufficient",
+      "severity": "major-blocking",
+      "expected": "Require repeated seeds and uncertainty for the narrowed conditions before treating small score differences or the selected winner as stable."
+    },
+    {
+      "id": "d2",
+      "type": "interaction_claim_without_factorial_control",
+      "severity": "major-blocking",
+      "expected": "Require the stock network with the proposed loss and compute a factorial interaction contrast separating loss, decoder, and interaction effects."
+    },
+    {
+      "id": "d3",
+      "type": "universal_and_sota_overclaim",
+      "severity": "major-blocking",
+      "expected": "Narrow the claim to the locked benchmark and completed comparisons; harmonize external baselines or avoid a state-of-the-art claim."
+    },
+    {
+      "id": "d4",
+      "type": "missing_attribution",
+      "severity": "major-fixable",
+      "expected": "Add the primary citation and accurate provenance for the external fusion block before publication."
+    },
+    {
+      "id": "d5",
+      "type": "internal_process_text_in_manuscript",
+      "severity": "major-fixable",
+      "expected": "Remove author-side notes, roadmap language, local configuration names, and unfinished-task instructions from the reader-facing manuscript."
+    }
+  ],
+  "decoys": [
+    "The transparent reporting of negative module interactions is a strength.",
+    "The reproducible single-seed runs remain useful exploratory evidence."
+  ],
+  "expected_recommendation": "major revision; empirical claims remain exploratory until repeated-seed, factorial-control, attribution, and comparable-baseline requirements are met"
+}
