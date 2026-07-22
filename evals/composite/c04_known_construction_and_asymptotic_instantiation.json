@@ -1,0 +1,43 @@
+{
+  "id": "c04_known_construction_and_asymptotic_instantiation",
+  "domain": "ecological sampling theory",
+  "title": "Network counterexamples to a root-rate species recovery law",
+  "advertised_claim": "A new network sampling family violates a conjectured recovery law, and partition-local sampling gives the unique maximal repair.",
+  "manuscript": "Abstract. We construct a new family of network sampling protocols that violates the conjectured recovery law q <= 1/2 + 0.4 sqrt(b/n), where b is sampling budget and n is the number of latent habitat indicators. The violation is attributed to a global bipartite network architecture. We also claim that partition-local sampling is the unique maximal class for which the root-rate expression holds.\n\nConstruction. The manuscript begins with a published randomized cataloging scheme. For each hidden habitat pattern x, the scheme draws a b-bit catalog message c from a distribution P(c|x) and answers query i using a deterministic rule d_i(c). The paper represents each message value as a node, connects habitat patterns to message nodes with edge weights P(c|x), and attaches query labels d_i(c) to the nodes. Sampling a neighbor and reading its label exactly reproduces the published cataloging protocol. No new message distribution, query rule, or recovery statistic is introduced.\n\nAsymptotic violation. The cited cataloging theorem states b <= alpha(q)n + O(log n) for fixed q. The manuscript observes that alpha(q) lies below the conjectured root-rate threshold over a nonempty interval. It then advertises a finite counterexample at n = 600 by setting the unspecified O(log n) contribution to zero. No finite-length constant, explicit catalog, or independent finite theorem supports that row. The asymptotic separation itself does not depend on the row.\n\nMechanism. The abstract attributes the violation to high-degree network hubs. Later, the paper acknowledges that the network is a graphical representation of the original randomized message channel and that removing or splitting hubs without changing P(c|x) leaves every query statistic unchanged. The operational mechanism is therefore the information content of the published cataloging distribution, while the chosen graph drawing is representational.\n\nRelated work. Recent papers prove the root-rate value for high-budget sampling, average-query objectives, and fixed small habitat partitions. The manuscript states that those results are disproved. Their objectives and admissible protocol classes differ from the unrestricted worst-case law tested here.\n\nRepair theorem. The paper proves that a product of sampling partitions satisfying a local root-rate theorem also satisfies the global theorem, including correlated habitat patterns. This is a valid sufficient condition. It also gives an exact fixed-network capacity criterion. The discussion calls partition locality necessary, unique, and maximal, while listing nonlocal network families compatible with the conjectured value and identifying a broader structural characterization as open.\n\nConclusion. The authors claim a new network protocol, a fully explicit finite counterexample, and the unique repair.",
+  "defects": [
+    {
+      "id": "d1",
+      "type": "contribution_mischaracterized",
+      "severity": "major-blocking",
+      "expected": "Identify that the network exactly re-encodes an existing randomized cataloging protocol; position the contribution as a model-boundary observation rather than a new sampling construction."
+    },
+    {
+      "id": "d2",
+      "type": "unsupported_finite_instantiation",
+      "severity": "major-blocking",
+      "expected": "Remove or rigorously justify the n=600 row; an asymptotic statement with an unspecified O(log n) constant does not establish that finite case."
+    },
+    {
+      "id": "d3",
+      "type": "related_work_scope_error",
+      "severity": "major-fixable",
+      "expected": "Explain why high-budget, average-objective, or fixed-partition results can coexist with failure of an unrestricted worst-case law."
+    },
+    {
+      "id": "d4",
+      "type": "sufficient_condition_claimed_necessary",
+      "severity": "major-blocking",
+      "expected": "Present partition locality as a sufficient repaired class and the fixed-network criterion as the exact conditional statement; withdraw necessity and maximality claims without proof."
+    },
+    {
+      "id": "d5",
+      "type": "representational_mechanism_misattribution",
+      "severity": "major-fixable",
+      "expected": "Attribute the recovery statistics to the published message distribution and query rules, rather than to graph hubs that can be redrawn without changing the protocol."
+    }
+  ],
+  "decoys": [
+    "The asymptotic separation can remain valid after the unsupported finite row is removed."
+  ],
+  "expected_recommendation": "major revision; the asymptotic model-boundary result may survive after construction, finite-example, positioning, and repair claims are corrected"
+}
