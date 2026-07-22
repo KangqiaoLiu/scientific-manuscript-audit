@@ -38,7 +38,7 @@ Run every item in `evals/trigger_cases.jsonl`. Record whether the skill appears 
 
 ## Synthetic task evaluation
 
-Run every item in `evals/synthetic_cases.jsonl`. Store the full model output and annotate detected defect IDs, assigned severity, requested resolution, recommendation impact, unsupported assertions, and evidence-status labels.
+Run the atomic suite in `evals/synthetic_cases.jsonl` and the composite suite in `evals/composite/`. Store the full model output and annotate detected defect IDs, assigned severity, requested resolution, recommendation impact, unsupported assertions, and evidence-status labels.
 
 ## Repetition
 
@@ -53,7 +53,12 @@ A result summary should include:
 - number of cases and runs
 - all rubric metrics
 - excluded or failed runs with reasons
+- atomic and composite results reported separately
 - representative successes and failures from synthetic cases
 - limitations of the task set
 
 The current repository does not include claims of expert equivalence or calibration against real editorial decisions.
+
+## Case provenance and safety
+
+All public evaluation inputs are independently written synthetic materials. Composite cases preserve recurring defect structures while replacing scientific domain, objects, notation, values, wording, and narrative organization. No real manuscript text or private review material is included. See `docs/CASE_DESIGN.md`.
