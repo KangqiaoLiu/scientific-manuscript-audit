@@ -1,12 +1,34 @@
 # Scientific Manuscript Audit
 
-**A referee-style scientific paper review skill for Codex and Claude Code.**
+**A claim-centered, evidence-grounded scientific manuscript audit skill for Codex and Claude Code.**
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Release](https://img.shields.io/badge/release-v0.1.0--rc.2-orange.svg)](CHANGELOG.md)
 [![Validation](https://github.com/KangqiaoLiu/scientific-manuscript-audit/actions/workflows/validate.yml/badge.svg)](.github/workflows/validate.yml)
 
-Scientific Manuscript Audit helps authors and research teams examine manuscripts before submission or revision. It produces claim-centered, evidence-grounded referee reports with calibrated issue severity, bounded revision requests, and a coherent publication recommendation.
+Scientific Manuscript Audit helps authors and research teams examine manuscripts before submission or revision. It produces referee-style reports organized around claim burden, inspected evidence, defect recoverability, bounded resolutions, and coherent publication recommendations.
+
+## What makes the audit distinctive
+
+The skill follows a traceable decision chain:
+
+```text
+claim → burden of proof → inspected evidence → decision-relevant gap → bounded resolution → recommendation impact
+```
+
+- **Claim-centered review architecture.** The audit reconstructs the manuscript's central and supporting claims, identifies the burden of proof created by each claim, and tests the supplied evidence against that burden.
+
+- **Decision-relevant issue prioritization.** Major comments are selected according to their effect on validity, claim strength, interpretation, reproducibility, significance, or venue fit. Comments sharing the same root cause are consolidated.
+
+- **Recoverability-calibrated severity.** Findings are classified as fatal, major-blocking, major-fixable, or minor according to their effect on the paper and the realistic path to resolution.
+
+- **Bounded revision requests.** Every substantial request states the uncertainty it resolves, the affected claim, the evidence required, and the resulting effect on severity or recommendation.
+
+- **Recommendation coherence.** The final recommendation is derived from the major findings, their evidentiary status, recoverability, and the standard of the target venue.
+
+- **Explicit evidence status.** Direct checks, supported inferences, literature-verification needs, and unverified scope are distinguished throughout the report.
+
+- **Revision and rebuttal auditing.** Resolution is judged from the revised manuscript and supporting evidence, with the response letter used to locate changes and claims of resolution.
 
 ## What it evaluates
 
@@ -19,16 +41,6 @@ Scientific Manuscript Audit helps authors and research teams examine manuscripts
 - issue severity based on decision impact and recoverability
 - consistency between major comments and the final recommendation
 - verification status for literature, calculations, and external facts
-
-## Distinctive review discipline
-
-The skill organizes the audit around a single chain:
-
-```text
-claim → burden of proof → inspected evidence → decision-relevant gap → bounded resolution → recommendation impact
-```
-
-Each major comment identifies the tested claim, inspected evidence, finding, consequence, bounded resolution, and recommendation impact. Fatal, major-blocking, major-fixable, and minor findings are calibrated by recoverability. Technical correctness, novelty, significance, and presentation receive separate judgments.
 
 ## Installation
 
