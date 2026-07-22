@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "scientific-manuscript-audit",
-  "version": "0.1.0-rc.3",
+  "version": "0.1.0",
   "description": "Scientific manuscript audit skills for research quality control.",
   "owner": {
     "name": "Kangqiao Liu"
@@ -11,7 +11,7 @@
       "name": "scientific-manuscript-audit",
       "displayName": "Scientific Manuscript Audit",
       "description": "Claim-centered manuscript audit with severity calibration, bounded revision requests, and advisory publication recommendations.",
-      "version": "0.1.0-rc.3",
+      "version": "0.1.0",
       "author": {
         "name": "Kangqiao Liu"
       },
