@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "scientific-manuscript-audit",
+  "version": "0.1.0-rc.1",
+  "description": "Referee-style scientific manuscript assessment skill.",
+  "owner": {
+    "name": "Kangqiao Liu"
+  },
+  "plugins": [
+    {
+      "name": "scientific-manuscript-audit",
+      "description": "Claim-centered manuscript audit with severity calibration, bounded revision requests, and advisory publication recommendations.",
+      "version": "0.1.0-rc.1",
+      "author": {
+        "name": "Kangqiao Liu"
+      },
+      "source": "./",
+      "category": "productivity",
+      "skills": [
+        "./skills/scientific-manuscript-audit"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+name: Feature request
+description: Propose a review, evaluation, safety, or compatibility improvement
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the scientific-review or workflow problem.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the behavior and how it could be tested.
+    validations:
+      required: true

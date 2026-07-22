@@ -1,0 +1,26 @@
+name: Bug report
+description: Report incorrect routing, review behavior, validation, or packaging
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the observed behavior and expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include host, version, prompt, and minimal synthetic or public input.
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Data confirmation
+      description: Confirm that the report contains no confidential manuscript, private review material, credentials, or personal data.
+    validations:
+      required: true

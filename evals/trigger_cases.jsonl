@@ -1,0 +1,60 @@
+{"id": "p01", "label": "trigger", "class": "direct", "prompt": "Peer-review this manuscript and recommend accept, revise, or reject."}
+{"id": "p02", "label": "trigger", "class": "direct", "prompt": "Act as a demanding referee for this scientific paper."}
+{"id": "p03", "label": "trigger", "class": "direct", "prompt": "Audit the technical correctness and novelty of the attached manuscript."}
+{"id": "p04", "label": "trigger", "class": "direct", "prompt": "Give me a referee report for this submission."}
+{"id": "p05", "label": "trigger", "class": "direct", "prompt": "Does this paper meet the standard of Physical Review Letters?"}
+{"id": "p06", "label": "trigger", "class": "direct", "prompt": "Identify reject-level problems in this manuscript without presuming rejection."}
+{"id": "p07", "label": "trigger", "class": "direct", "prompt": "Assess claim overreach and evidence strength in this paper."}
+{"id": "p08", "label": "trigger", "class": "direct", "prompt": "Review this revised manuscript against the original referee comments."}
+{"id": "p09", "label": "trigger", "class": "direct", "prompt": "Check whether the rebuttal resolves every major concern."}
+{"id": "p10", "label": "trigger", "class": "direct", "prompt": "Evaluate journal fit and publication readiness for this article."}
+{"id": "p11", "label": "trigger", "class": "direct", "prompt": "Map the abstract claims to the results and figures."}
+{"id": "p12", "label": "trigger", "class": "direct", "prompt": "Pressure-test the central theorem and its assumptions."}
+{"id": "p13", "label": "trigger", "class": "direct", "prompt": "Audit the paper-code-figure consistency and editorial implications."}
+{"id": "p14", "label": "trigger", "class": "direct", "prompt": "Assess whether the nearest baseline comparison supports the novelty claim."}
+{"id": "p15", "label": "trigger", "class": "direct", "prompt": "Classify all issues as fatal, major-blocking, major-fixable, or minor."}
+{"id": "p16", "label": "trigger", "class": "direct", "prompt": "Review the statistical design and decide whether the main conclusion survives."}
+{"id": "p17", "label": "trigger", "class": "direct", "prompt": "Give a publication recommendation with decision-driving reasons."}
+{"id": "p18", "label": "trigger", "class": "direct", "prompt": "Assess whether the numerical convergence evidence supports the headline claim."}
+{"id": "p19", "label": "trigger", "class": "direct", "prompt": "Review the manuscript and bound every requested revision."}
+{"id": "p20", "label": "trigger", "class": "direct", "prompt": "Determine whether the limitations are compatible with the stated conclusion."}
+{"id": "p21", "label": "trigger", "class": "direct", "prompt": "Audit this conference submission for technical validity and significance."}
+{"id": "p22", "label": "trigger", "class": "direct", "prompt": "Review this preprint as a skeptical domain referee."}
+{"id": "p23", "label": "trigger", "class": "direct", "prompt": "Assess the manuscript after major revision and update the verdict."}
+{"id": "p24", "label": "trigger", "class": "direct", "prompt": "Check whether the paper earns its claims of generality and robustness."}
+{"id": "p25", "label": "trigger", "class": "direct", "prompt": "Write a concise referee-style triage with major blockers and journal fit."}
+{"id": "i01", "label": "trigger", "class": "implicit", "prompt": "The prose looks polished. I need to know whether the science can survive review."}
+{"id": "i02", "label": "trigger", "class": "implicit", "prompt": "Which parts of this paper could drive an editor to decline it?"}
+{"id": "i03", "label": "trigger", "class": "implicit", "prompt": "The authors answered every comment. Did the manuscript actually change enough?"}
+{"id": "i04", "label": "trigger", "class": "implicit", "prompt": "Find the smallest supported version of the paper's main claim."}
+{"id": "i05", "label": "trigger", "class": "implicit", "prompt": "Tell me what evidence a selective journal would still require."}
+{"id": "i06", "label": "trigger", "class": "implicit", "prompt": "This work is correct. Is the contribution broad enough for the target venue?"}
+{"id": "i07", "label": "trigger", "class": "implicit", "prompt": "The title says universal. Trace whether the evidence earns that word."}
+{"id": "i08", "label": "trigger", "class": "implicit", "prompt": "The model beats a weak baseline. Is the novelty case credible?"}
+{"id": "i09", "label": "trigger", "class": "implicit", "prompt": "The figures look convincing. Check whether they measure the advertised concept."}
+{"id": "i10", "label": "trigger", "class": "implicit", "prompt": "Which requested revisions are genuinely decision-relevant?"}
+{"id": "i11", "label": "trigger", "class": "implicit", "prompt": "The response letter is persuasive. Verify the revised source files."}
+{"id": "i12", "label": "trigger", "class": "implicit", "prompt": "Would narrowing the claims make this paper publishable?"}
+{"id": "i13", "label": "trigger", "class": "implicit", "prompt": "I need an independent view of the manuscript's rejection risk."}
+{"id": "i14", "label": "trigger", "class": "implicit", "prompt": "Separate technical flaws from venue-level significance concerns."}
+{"id": "i15", "label": "trigger", "class": "implicit", "prompt": "Check whether one central defect dominates the recommendation."}
+{"id": "n01", "label": "no_trigger", "class": "exclusion", "prompt": "Proofread the abstract for grammar and concision."}
+{"id": "n02", "label": "no_trigger", "class": "exclusion", "prompt": "Convert these references to BibTeX."}
+{"id": "n03", "label": "no_trigger", "class": "exclusion", "prompt": "Explain equation 12 step by step."}
+{"id": "n04", "label": "no_trigger", "class": "exclusion", "prompt": "Resize the figures and increase the font size."}
+{"id": "n05", "label": "no_trigger", "class": "exclusion", "prompt": "Summarize this paper for undergraduate students."}
+{"id": "n06", "label": "no_trigger", "class": "exclusion", "prompt": "Translate this introduction into Chinese."}
+{"id": "n07", "label": "no_trigger", "class": "exclusion", "prompt": "Write a cover letter for journal submission."}
+{"id": "n08", "label": "no_trigger", "class": "exclusion", "prompt": "Suggest five research ideas related to this topic."}
+{"id": "n09", "label": "no_trigger", "class": "exclusion", "prompt": "Format this manuscript using the APS template."}
+{"id": "n10", "label": "no_trigger", "class": "exclusion", "prompt": "Fix the LaTeX compilation errors."}
+{"id": "n11", "label": "no_trigger", "class": "exclusion", "prompt": "Generate alt text for these figures."}
+{"id": "n12", "label": "no_trigger", "class": "exclusion", "prompt": "Create a slide deck from this paper."}
+{"id": "n13", "label": "no_trigger", "class": "exclusion", "prompt": "Extract all equations from the PDF."}
+{"id": "n14", "label": "no_trigger", "class": "exclusion", "prompt": "Find the DOI for these citations."}
+{"id": "n15", "label": "no_trigger", "class": "exclusion", "prompt": "Rewrite this paragraph in a more formal tone."}
+{"id": "n16", "label": "no_trigger", "class": "exclusion", "prompt": "Make a checklist for submitting to arXiv."}
+{"id": "n17", "label": "no_trigger", "class": "exclusion", "prompt": "Plot these numerical data."}
+{"id": "n18", "label": "no_trigger", "class": "exclusion", "prompt": "Explain what peer review means."}
+{"id": "n19", "label": "no_trigger", "class": "exclusion", "prompt": "Draft an email to my coauthor about the deadline."}
+{"id": "n20", "label": "no_trigger", "class": "exclusion", "prompt": "Build a literature-search query for stochastic thermodynamics."}

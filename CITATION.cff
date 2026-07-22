@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software in a research workflow, please cite it using the metadata below."
+title: "Scientific Manuscript Audit"
+type: software
+authors:
+  - family-names: "Liu"
+    given-names: "Kangqiao"
+version: "0.1.0-rc.1"
+date-released: "2026-07-22"
+repository-code: "https://github.com/KangqiaoLiu/scientific-manuscript-audit"
+license: "Apache-2.0"
+keywords:
+  - scientific manuscript
+  - peer review
+  - manuscript audit
+  - agent skill
+  - Codex
+  - Claude Code
