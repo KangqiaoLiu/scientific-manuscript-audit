@@ -2,7 +2,7 @@
 
 **面向 Codex 与 Claude Code、以主张为中心并以证据为基础的科研稿件审查技能。**
 
-[English](README.md) | 简体中文
+[English](README.md) | 简体中文 | [日本語](README.ja.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-v0.1.0--rc.2-orange.svg)](CHANGELOG.md)
@@ -113,7 +113,7 @@ cp -R skills/scientific-manuscript-audit ~/.claude/skills/
 被检验的主张：该方法能够识别首先进入热失控的单元
 发现：分别比较完整时间区间内的最大值只能排序最终峰值，不能确定最早的阈值越过事件
 有边界的解决方案：计算首次通过时间或精确的竞争风险概率；
-                    最大值差异可以保留为次级观测量
+                     最大值差异可以保留为次级观测量
 对投稿建议的影响：在重新计算前，首先失效事件的主张仍缺乏支撑
 ```
 
