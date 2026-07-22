@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import unittest
 from pathlib import Path
 
@@ -50,6 +51,33 @@ class RepositoryTests(unittest.TestCase):
             if "__MACOSX" in rel.parts or path.name == ".DS_Store" or path.name.startswith("._"):
                 bad.append(str(rel))
         self.assertEqual([], bad)
+
+    def test_workflow_is_hardened(self) -> None:
+        text = (ROOT / ".github/workflows/validate.yml").read_text(encoding="utf-8")
+        self.assertIn("permissions:\n  contents: read", text)
+        self.assertIn("persist-credentials: false", text)
+        self.assertIn("timeout-minutes:", text)
+        self.assertIn("cancel-in-progress: true", text)
+        refs = re.findall(r"^\s*-\s+uses:\s+([^#\s]+)", text, flags=re.MULTILINE)
+        self.assertTrue(refs)
+        for action_ref in refs:
+            if action_ref.startswith("./"):
+                continue
+            self.assertIn("@", action_ref)
+            self.assertRegex(action_ref.rsplit("@", 1)[1], r"^[0-9a-f]{40}$")
+
+    def test_repository_protection_files(self) -> None:
+        for path in (
+            ".github/CODEOWNERS",
+            ".github/dependabot.yml",
+            "SECURITY.md",
+            "RESPONSIBLE_USE.md",
+            "TRADEMARKS.md",
+        ):
+            self.assertTrue((ROOT / path).is_file(), path)
+        pr_template = (ROOT / ".github/pull_request_template.md").read_text(encoding="utf-8")
+        self.assertIn("I have the right to submit", pr_template)
+        self.assertIn("submitted under the Apache License 2.0", pr_template)
 
 
 if __name__ == "__main__":
