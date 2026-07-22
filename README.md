@@ -2,7 +2,7 @@
 
 **A claim-centered, evidence-grounded scientific manuscript audit skill for Codex and Claude Code.**
 
-English | [简体中文](README.zh-CN.md)
+English | [简体中文](README.zh-CN.md) | [日本語](README.ja.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-v0.1.0--rc.2-orange.svg)](CHANGELOG.md)
