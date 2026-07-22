@@ -24,6 +24,8 @@ LOCAL_PATH_PATTERNS = [
     re.compile(r"[A-Za-z]:\\Users\\[A-Za-z0-9._-]+\\"),
 ]
 EMAIL_PATTERN = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
+ACTION_USE_PATTERN = re.compile(r"^\s*-\s+uses:\s+([^#\s]+)", re.MULTILINE)
+FULL_COMMIT_SHA = re.compile(r"^[0-9a-f]{40}$")
 
 
 def fail(message: str) -> None:
@@ -64,6 +66,65 @@ def validate_skill() -> None:
         fail("SKILL.md name mismatch")
     if "description:" not in text:
         fail("SKILL.md lacks description")
+
+
+def validate_repository_security() -> None:
+    workflow = ROOT / ".github" / "workflows" / "validate.yml"
+    text = workflow.read_text(encoding="utf-8")
+
+    required_fragments = {
+        "read-only workflow permissions": "permissions:\n  contents: read",
+        "workflow concurrency control": "concurrency:",
+        "cancellation of superseded runs": "cancel-in-progress: true",
+        "job timeout": "timeout-minutes:",
+        "non-persistent checkout credentials": "persist-credentials: false",
+    }
+    for label, fragment in required_fragments.items():
+        if fragment not in text:
+            fail(f"validate workflow lacks {label}")
+
+    action_refs = ACTION_USE_PATTERN.findall(text)
+    if not action_refs:
+        fail("validate workflow contains no action references")
+    for action_ref in action_refs:
+        if action_ref.startswith("./"):
+            continue
+        if "@" not in action_ref:
+            fail(f"GitHub Action lacks an immutable reference: {action_ref}")
+        action, ref = action_ref.rsplit("@", 1)
+        if not FULL_COMMIT_SHA.fullmatch(ref):
+            fail(f"GitHub Action is not pinned to a full commit SHA: {action}@{ref}")
+
+    dependabot = ROOT / ".github" / "dependabot.yml"
+    if not dependabot.exists():
+        fail("missing GitHub Actions Dependabot configuration")
+    dependabot_text = dependabot.read_text(encoding="utf-8")
+    for fragment in ("package-ecosystem: github-actions", "interval: weekly"):
+        if fragment not in dependabot_text:
+            fail(f"Dependabot configuration lacks: {fragment}")
+
+    required_policy_files = (
+        ROOT / ".github" / "CODEOWNERS",
+        ROOT / "SECURITY.md",
+        ROOT / "RESPONSIBLE_USE.md",
+        ROOT / "TRADEMARKS.md",
+    )
+    for path in required_policy_files:
+        if not path.exists():
+            fail(f"missing repository protection file: {path.relative_to(ROOT)}")
+
+    pr_template = (ROOT / ".github" / "pull_request_template.md").read_text(encoding="utf-8")
+    for fragment in (
+        "I have the right to submit",
+        "submitted under the Apache License 2.0",
+        "No confidential manuscript",
+    ):
+        if fragment not in pr_template:
+            fail(f"pull request template lacks contribution safeguard: {fragment}")
+
+    security_text = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+    if "Verifying official distributions" not in security_text:
+        fail("SECURITY.md lacks official distribution verification guidance")
 
 
 def load_jsonl(path: Path) -> list[dict]:
@@ -136,6 +197,7 @@ def main() -> int:
     validate_paths()
     validate_text()
     validate_skill()
+    validate_repository_security()
     validate_evals()
     validate_dist()
     print("repository validation passed")
