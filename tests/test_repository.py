@@ -20,10 +20,18 @@ class RepositoryTests(unittest.TestCase):
         self.assertEqual(40, sum(row["label"] == "trigger" for row in rows))
         self.assertEqual(20, sum(row["label"] == "no_trigger" for row in rows))
 
-    def test_synthetic_count(self) -> None:
+    def test_synthetic_counts(self) -> None:
         rows = [json.loads(line) for line in (ROOT / "evals/synthetic_cases.jsonl").read_text(encoding="utf-8").splitlines()]
         self.assertEqual(12, len(rows))
         self.assertTrue(all(row["defects"] for row in rows))
+        composite = [json.loads(path.read_text(encoding="utf-8")) for path in sorted((ROOT / "evals/composite").glob("*.json"))]
+        self.assertEqual(6, len(composite))
+        self.assertTrue(all(3 <= len(row["defects"]) <= 6 for row in composite))
+        self.assertTrue(all(1 <= len(row["decoys"]) <= 3 for row in composite))
+        for row in composite:
+            word_count = len(row["manuscript"].split())
+            self.assertGreaterEqual(word_count, 380)
+            self.assertLessEqual(word_count, 900)
 
     def test_distributions_match(self) -> None:
         canonical = ROOT / "skills/scientific-manuscript-audit"
