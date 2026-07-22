@@ -2,6 +2,27 @@
 
 All notable changes are recorded in this file.
 
+## [0.1.0] - 2026-07-22
+
+### Added
+
+- canonical `scientific-manuscript-audit` Agent Skill
+- Codex and Claude Code distribution packages
+- Claude Code plugin marketplace metadata
+- 60 trigger and boundary cases
+- 12 atomic synthetic manuscript-audit cases
+- 6 composite synthetic manuscript-audit cases
+- worked synthetic examples, evaluation protocol, and scoring rubric
+- repository validation, security, responsible-use, citation, licensing, and release documentation
+- complete English, Simplified Chinese, and Japanese README documentation
+
+### Changed
+
+- strengthened claim-to-evidence checks, severity calibration, bounded revision requests, and recommendation coherence
+- aligned Claude Code plugin metadata with current manifest and default skill discovery
+- hardened GitHub Actions, repository protections, dependency monitoring, and distribution synchronization
+- clarified author-side scope, confidentiality requirements, and the boundary with formal peer review and editorial judgment
+
 ## [0.1.0-rc.3] - 2026-07-22
 
 ### Added
