@@ -26,6 +26,11 @@ LOCAL_PATH_PATTERNS = [
 EMAIL_PATTERN = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")
 ACTION_USE_PATTERN = re.compile(r"^\s*-\s+uses:\s+([^#\s]+)", re.MULTILINE)
 FULL_COMMIT_SHA = re.compile(r"^[0-9a-f]{40}$")
+SEMVER = re.compile(r"^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$")
+MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+ALLOWED_EXTERNAL_ACTIONS = {"actions/checkout", "actions/setup-python"}
+CLAUDE_PLUGIN_SCHEMA = "https://json.schemastore.org/claude-code-plugin-manifest.json"
+README_FILES = ("README.md", "README.zh-CN.md", "README.ja.md")
 
 
 def fail(message: str) -> None:
@@ -57,6 +62,22 @@ def validate_text() -> None:
             fail(f"email address in {path.relative_to(ROOT)}")
 
 
+def validate_markdown_links() -> None:
+    for path in ROOT.rglob("*.md"):
+        text = path.read_text(encoding="utf-8")
+        for target in MARKDOWN_LINK.findall(text):
+            target = target.strip().split("#", 1)[0]
+            if not target or target.startswith(("http://", "https://", "mailto:")):
+                continue
+            resolved = (path.parent / target).resolve()
+            try:
+                resolved.relative_to(ROOT.resolve())
+            except ValueError:
+                fail(f"Markdown link escapes repository: {path.relative_to(ROOT)} -> {target}")
+            if not resolved.exists():
+                fail(f"broken Markdown link: {path.relative_to(ROOT)} -> {target}")
+
+
 def validate_skill() -> None:
     path = ROOT / "skills" / "scientific-manuscript-audit" / "SKILL.md"
     text = path.read_text(encoding="utf-8")
@@ -66,6 +87,77 @@ def validate_skill() -> None:
         fail("SKILL.md name mismatch")
     if "description:" not in text:
         fail("SKILL.md lacks description")
+
+
+def validate_versions_and_manifests() -> None:
+    version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+    if not SEMVER.fullmatch(version):
+        fail(f"VERSION is not valid semantic version text: {version}")
+
+    plugin = json.loads((ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8"))
+    marketplace = json.loads((ROOT / ".claude-plugin" / "marketplace.json").read_text(encoding="utf-8"))
+    entries = marketplace.get("plugins", [])
+    if len(entries) != 1:
+        fail("marketplace must contain exactly one plugin entry")
+    entry = entries[0]
+
+    if plugin.get("$schema") != CLAUDE_PLUGIN_SCHEMA:
+        fail("Claude plugin manifest uses an outdated or unexpected schema URL")
+    if plugin.get("name") != "scientific-manuscript-audit":
+        fail("Claude plugin manifest name mismatch")
+    if marketplace.get("name") != "scientific-manuscript-audit":
+        fail("Claude marketplace name mismatch")
+    if entry.get("name") != "scientific-manuscript-audit":
+        fail("Claude marketplace plugin name mismatch")
+    if entry.get("source") != "./":
+        fail("Claude marketplace plugin must use the repository root as its source")
+    if entry.get("strict") is not True:
+        fail("Claude marketplace plugin must use strict manifest mode")
+    if "skills" in plugin or "skills" in entry:
+        fail("Claude metadata must rely on default skills/ discovery without duplicate component declarations")
+
+    observed_versions = {
+        "plugin.json": plugin.get("version"),
+        "marketplace.json": marketplace.get("version"),
+        "marketplace plugin": entry.get("version"),
+    }
+    for label, observed in observed_versions.items():
+        if observed != version:
+            fail(f"version mismatch in {label}: expected {version}, found {observed}")
+
+    citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+    if f'version: "{version}"' not in citation:
+        fail("CITATION.cff version is out of sync")
+    if f"## [{version}]" not in (ROOT / "CHANGELOG.md").read_text(encoding="utf-8"):
+        fail("CHANGELOG.md lacks the current version")
+    if f"Version {version}" not in (ROOT / "THIRD_PARTY_NOTICES.md").read_text(encoding="utf-8"):
+        fail("THIRD_PARTY_NOTICES.md version is out of sync")
+
+    badge_version = "v" + version.replace("-", "--")
+    required_commands = (
+        "$skill-installer install https://github.com/KangqiaoLiu/scientific-manuscript-audit/tree/main/skills/scientific-manuscript-audit",
+        "/plugin marketplace add KangqiaoLiu/scientific-manuscript-audit",
+        "/plugin install scientific-manuscript-audit@scientific-manuscript-audit",
+        "/reload-plugins",
+    )
+    for name in README_FILES:
+        text = (ROOT / name).read_text(encoding="utf-8")
+        if badge_version not in text:
+            fail(f"version badge is out of sync in {name}")
+        for command in required_commands:
+            if command not in text:
+                fail(f"installation command missing from {name}: {command}")
+
+    navigation = {
+        "README.md": ("README.zh-CN.md", "README.ja.md"),
+        "README.zh-CN.md": ("README.md", "README.ja.md"),
+        "README.ja.md": ("README.md", "README.zh-CN.md"),
+    }
+    for name, targets in navigation.items():
+        text = (ROOT / name).read_text(encoding="utf-8")
+        for target in targets:
+            if f"({target})" not in text:
+                fail(f"language navigation missing from {name}: {target}")
 
 
 def validate_repository_security() -> None:
@@ -92,6 +184,8 @@ def validate_repository_security() -> None:
         if "@" not in action_ref:
             fail(f"GitHub Action lacks an immutable reference: {action_ref}")
         action, ref = action_ref.rsplit("@", 1)
+        if action not in ALLOWED_EXTERNAL_ACTIONS:
+            fail(f"unapproved external GitHub Action: {action}")
         if not FULL_COMMIT_SHA.fullmatch(ref):
             fail(f"GitHub Action is not pinned to a full commit SHA: {action}@{ref}")
 
@@ -108,6 +202,7 @@ def validate_repository_security() -> None:
         ROOT / "SECURITY.md",
         ROOT / "RESPONSIBLE_USE.md",
         ROOT / "TRADEMARKS.md",
+        ROOT / "docs" / "RELEASE_PROCESS.md",
     )
     for path in required_policy_files:
         if not path.exists():
@@ -196,7 +291,9 @@ def validate_dist() -> None:
 def main() -> int:
     validate_paths()
     validate_text()
+    validate_markdown_links()
     validate_skill()
+    validate_versions_and_manifests()
     validate_repository_security()
     validate_evals()
     validate_dist()

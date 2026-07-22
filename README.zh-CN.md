@@ -5,7 +5,7 @@
 [English](README.md) | 简体中文 | [日本語](README.ja.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v0.1.0--rc.2-orange.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v0.1.0--rc.3-orange.svg)](CHANGELOG.md)
 [![Validation](https://github.com/KangqiaoLiu/scientific-manuscript-audit/actions/workflows/validate.yml/badge.svg)](.github/workflows/validate.yml)
 
 Scientific Manuscript Audit 帮助论文作者与研究团队在投稿或修订前系统检查科研稿件。它生成审稿人风格的报告，并围绕主张所承担的证明责任、已经检查的证据、问题的可修复性、有边界的修改要求以及一致的投稿建议组织分析。
@@ -63,13 +63,14 @@ mkdir -p .agents/skills
 cp -R skills/scientific-manuscript-audit .agents/skills/
 ```
 
-### Claude Code
+### Claude Code CLI
 
-将该仓库注册为插件市场并安装技能：
+在 Claude Code CLI 会话中，将该仓库注册为插件市场、安装技能并重新加载插件：
 
 ```text
 /plugin marketplace add KangqiaoLiu/scientific-manuscript-audit
 /plugin install scientific-manuscript-audit@scientific-manuscript-audit
+/reload-plugins
 ```
 
 也可以在用户级目录中手动安装：
