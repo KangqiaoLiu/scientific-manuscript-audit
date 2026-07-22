@@ -1,0 +1,44 @@
+{
+  "id": "c03_value_gain_and_prior_work_boundary",
+  "domain": "statistical decision theory",
+  "title": "A decision characterization of adaptive sorting with nonorthogonal side information",
+  "advertised_claim": "The manuscript gives the first universal identification of adaptive sorting gain with a decision value.",
+  "manuscript": "Abstract. Adaptive sorting uses side information to place labeled objects into cost-ordered bins. We prove that its value is exactly a finite decision value and that every advantage of a generalized readout transfers one-to-one into a sorting gain. The theorem is presented as universal for finite-dimensional side-information systems and as the first connection between adaptive sorting and statistical discrimination.\n\nSetup. An object carries a classical label x in an orthogonal register and a side-information state sigma_x in a separate finite-dimensional sensor. A readout outcome y is followed by a permutation assigning the labels to bins with ordered costs c_0 <= ... <= c_m. For this label-diagonal family, the manuscript derives the optimal posterior-ranking rule and writes the total recovered value as the initial mean cost minus the posterior Bayes risk. This derivation is complete for the stated family.\n\nSpecialization. For a cost profile with one preferred bin and a common penalty Delta for every other bin, the paper obtains V = Delta(P_correct - p_0), where p_0 is the population initially occupying the preferred label. Two pages later it defines adaptive gain G as improvement over the best policy without reading the sensor and repeats G = Delta(P_correct - p_0). A fixed no-readout permutation can already place the largest prior population in the preferred bin, so its reference population is p_max, which need not equal p_0.\n\nScope. The title and conclusion refer to arbitrary adaptive sorting. The proof assumes a classical label register, side information correlated only through that label, diagonal bin costs, and feedback actions restricted to permutations. The discussion mentions coherent label registers and distributed sorting, then states that the same representation applies without derivation.\n\nPrior work. A cited thesis formulates the optimal readout as a convex program and notes its similarity to minimum-error discrimination. A workshop abstract from the same research line mentions the discrimination connection. The manuscript states that no previous work recognized any such relationship. Its stronger result is an equality for the full sorting value in the classical-label family, including a general ranking loss and an exact transfer of readout-class gaps.\n\nBoundary results. The paper proves projective optimality for two labels under the single-preferred-bin zero-one loss by invoking the binary minimum-error measurement. It then adds a third abstention action with an intermediate cost and states that the same proof establishes projective optimality for every abstention penalty. The derivation never analyzes the three-action decision problem. The paper also states that every strict generalized-readout gap persists under small perturbations because the set of projective readouts is compact. The proof does not specify the finite rank-pattern decomposition or the outcome reduction needed to make the optimization domains compact.\n\nExamples. Symmetric three- and four-state sensor ensembles are evaluated analytically and by a dense angular grid. The grid agrees with the closed forms to six digits. A repeated paragraph explaining the different roles of register and sensor dimensions appears on both sides of the examples.\n\nConclusion. The paper claims a universal theorem, a first connection to discrimination, and an exact formula for adaptive gain.",
+  "defects": [
+    {
+      "id": "d1",
+      "type": "value_gain_conflation",
+      "severity": "major-blocking",
+      "expected": "Distinguish the total recovered value Delta(P_correct-p_0) from gain over the optimal no-readout policy, which uses p_max; correct the statements that conflate them."
+    },
+    {
+      "id": "d2",
+      "type": "scope_overreach",
+      "severity": "major-blocking",
+      "expected": "Restrict the universal claim to the classical-label, diagonal-cost, permutation-feedback family or supply proofs for coherent and distributed settings."
+    },
+    {
+      "id": "d3",
+      "type": "prior_work_overclaim",
+      "severity": "major-fixable",
+      "expected": "Acknowledge the earlier optimization-level connection and position the contribution as a value-level characterization with a cost-induced ranking loss."
+    },
+    {
+      "id": "d4",
+      "type": "no_go_extension_without_proof",
+      "severity": "major-fixable",
+      "expected": "Keep the proved binary zero-one result and treat the abstention-action extension as a separate decision problem requiring its own proof."
+    },
+    {
+      "id": "d5",
+      "type": "compactness_argument_incomplete",
+      "severity": "major-fixable",
+      "expected": "Make the finite-dimensional measurement domains and outcome/rank reductions explicit before using continuity to claim open robustness."
+    }
+  ],
+  "decoys": [
+    "The symmetric-example calculations and their numerical grid validation are strong evidence for those examples.",
+    "The duplicated dimension paragraph is an editorial issue."
+  ],
+  "expected_recommendation": "major revision; the central family theorem remains potentially publishable after correcting the gain formula and scope"
+}
