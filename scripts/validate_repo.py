@@ -79,19 +79,47 @@ def load_jsonl(path: Path) -> list[dict]:
 def validate_evals() -> None:
     triggers = load_jsonl(ROOT / "evals" / "trigger_cases.jsonl")
     synthetic = load_jsonl(ROOT / "evals" / "synthetic_cases.jsonl")
+    composite = [json.loads(path.read_text(encoding="utf-8")) for path in sorted((ROOT / "evals" / "composite").glob("*.json"))]
     if len(triggers) != 60:
         fail(f"expected 60 trigger cases, found {len(triggers)}")
     if len(synthetic) != 12:
-        fail(f"expected 12 synthetic cases, found {len(synthetic)}")
-    ids = [row["id"] for row in triggers + synthetic]
+        fail(f"expected 12 atomic synthetic cases, found {len(synthetic)}")
+    if len(composite) != 6:
+        fail(f"expected 6 composite synthetic cases, found {len(composite)}")
+    ids = [row["id"] for row in triggers + synthetic + composite]
     if len(ids) != len(set(ids)):
         fail("duplicate evaluation case id")
     labels = {row["label"] for row in triggers}
     if labels != {"trigger", "no_trigger"}:
         fail(f"unexpected trigger labels: {labels}")
-    for case in synthetic:
+    allowed_severities = {"fatal", "major-blocking", "major-fixable", "minor"}
+    for case in synthetic + composite:
+        required = {"id", "domain", "title", "advertised_claim", "manuscript", "defects", "expected_recommendation"}
+        missing = required - set(case)
+        if missing:
+            fail(f"synthetic case {case.get('id', '<unknown>')} lacks fields: {sorted(missing)}")
         if not case.get("defects"):
             fail(f"synthetic case lacks defects: {case['id']}")
+        defect_ids = [defect.get("id") for defect in case["defects"]]
+        if len(defect_ids) != len(set(defect_ids)):
+            fail(f"duplicate defect id in {case['id']}")
+        for defect in case["defects"]:
+            if set(defect) != {"id", "type", "severity", "expected"}:
+                fail(f"invalid defect schema in {case['id']}: {defect.get('id')}")
+            if defect["severity"] not in allowed_severities:
+                fail(f"invalid severity in {case['id']}: {defect['severity']}")
+        if case in composite:
+            word_count = len(re.findall(r"\b\w+[\w'-]*\b", case["manuscript"]))
+            if not 380 <= word_count <= 900:
+                fail(f"composite case {case['id']} has {word_count} words; expected 380-900")
+            if not 3 <= len(case["defects"]) <= 6:
+                fail(f"composite case {case['id']} must contain 3-6 defects")
+            if not 1 <= len(case.get("decoys", [])) <= 3:
+                fail(f"composite case {case['id']} must contain 1-3 decoys")
+            unsafe_markers = ("http://", "https://", "doi:", "arxiv:", "\\cite{", "@")
+            lower_text = (case["manuscript"] + " " + case["advertised_claim"]).lower()
+            if any(marker in lower_text for marker in unsafe_markers):
+                fail(f"composite case contains source-identifying marker: {case['id']}")
 
 
 def validate_dist() -> None:
