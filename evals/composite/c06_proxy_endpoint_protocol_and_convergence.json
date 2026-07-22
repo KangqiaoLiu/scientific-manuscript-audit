@@ -1,0 +1,44 @@
+{
+  "id": "c06_proxy_endpoint_protocol_and_convergence",
+  "domain": "electrochemical safety modeling",
+  "title": "First thermal-runaway selection in coupled electrochemical cells",
+  "advertised_claim": "A converged dynamic model predicts which of two coupled cells enters thermal runaway first and how failure shields the surviving cell.",
+  "manuscript": "Abstract. Two nominally identical electrochemical cells connected through a thermal interface can develop a reproducible preference for the first runaway event. We derive an exchange-symmetry theory, compute a first-runaway phase diagram, and show that failure dynamically shields the surviving cell. The numerical results are described as converged, and a logistic probability formula is said to agree with exact competing-risk statistics.\n\nModel and symmetry. The complete equations possess an exchange transformation that swaps the cells, reflects the thermal network, and swaps the full cooling and current histories. Under this transformation the cumulative failure hazards are interchanged. The theorem is derived correctly for the complete transformed protocol.\n\nFirst-event observable. Simulations define J_i as the maximum local runaway indicator attained by cell i over the entire integration interval and define Phi = log(J_2/J_1). The sign of Phi labels which cell fails first. The solver neither computes a first-passage time nor stops at the first threshold event. In a representative trace, cell 1 crosses the nominal threshold at time 4.2 while cell 2 remains below threshold until time 6.1 and reaches a larger maximum at time 6.7. Phi labels cell 2 as the first failure.\n\nSpatial convergence. A low-order global thermal basis is used for the phase diagram. Total heat release changes by less than one percent between orders 4 and 12. The local hotspot indicator changes from 0.96 to 4.8, and Phi changes sign at several points. The convergence section reports total heat and mean temperature only, then says these results establish convergence of all failure statistics.\n\nDriving protocol. The paper varies a ramp-curvature parameter a and calls it an exchange-odd field. In code, changing a modifies only the current history of cell 1; cell 2's current and both cooling histories are fixed, and positive a also changes the cutoff time. The pair a and -a therefore does not implement the complete exchange transformation used in the theorem. The apparent odd curve is interpreted as numerical confirmation of symmetry.\n\nFailure probability. A logistic formula P_2 = 1/(1+exp(-m Phi)) is derived when the cumulative hazard histories remain proportional at every time. The paper substitutes the ratio of separate maximum indicators for that proportionality constant over the full parameter plane. It checks exact competing-risk quadrature at three favorable points and states global agreement. No error map or proportionality test is reported.\n\nPost-failure dynamics. The shielding result replaces the failed cell by a larger static thermal resistance in a series-network formula. No time-dependent runaway, heat redistribution, or post-event integration is performed. The abstract calls this a dynamic cascade calculation. The pre-event time integrator is well converged, and the exact exchange theorem remains valid for the properly transformed protocol.\n\nConclusion. Maximum-indicator asymmetry, convergence of global heat, the one-sided ramp scan, and a static resistance continuation are presented as a converged prediction of member-resolved first runaway and dynamic shielding.",
+  "defects": [
+    {
+      "id": "d1",
+      "type": "proxy_endpoint_mismatch",
+      "severity": "major-blocking",
+      "expected": "Explain that separate full-interval maxima do not determine the first threshold event; require first-passage times or the exact competing-risk integral as the primary endpoint."
+    },
+    {
+      "id": "d2",
+      "type": "claim_bearing_quantity_nonconvergence",
+      "severity": "major-blocking",
+      "expected": "Recognize that convergence of total heat and mean temperature does not establish convergence of local hotspot risk or event selection; refine the claim-bearing quantities."
+    },
+    {
+      "id": "d3",
+      "type": "implemented_protocol_not_symmetry_pair",
+      "severity": "major-blocking",
+      "expected": "Distinguish the exact exchange theorem from the one-sided current-ramp sweep and require a paired protocol implementing the complete transformation."
+    },
+    {
+      "id": "d4",
+      "type": "approximation_scope_unvalidated",
+      "severity": "major-fixable",
+      "expected": "Label the logistic expression as a proportional-hazard approximation and map its error against exact competing-risk quadrature over the claimed domain."
+    },
+    {
+      "id": "d5",
+      "type": "static_limit_presented_as_dynamic",
+      "severity": "major-blocking",
+      "expected": "Restrict shielding to a static or quasistatic network limit or add time-dependent post-event thermal dynamics."
+    }
+  ],
+  "decoys": [
+    "The exchange theorem is a valid result for the correctly transformed protocol.",
+    "Pre-event time-integration convergence does not settle spatial hotspot convergence or first-event validity."
+  ],
+  "expected_recommendation": "reject and resubmit or major revision; the symmetry framework is viable, while first-event and dynamic-shielding claims require recomputation"
+}
