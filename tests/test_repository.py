@@ -60,11 +60,14 @@ class RepositoryTests(unittest.TestCase):
         self.assertIn("cancel-in-progress: true", text)
         refs = re.findall(r"^\s*-\s+uses:\s+([^#\s]+)", text, flags=re.MULTILINE)
         self.assertTrue(refs)
+        allowed = {"actions/checkout", "actions/setup-python"}
         for action_ref in refs:
             if action_ref.startswith("./"):
                 continue
             self.assertIn("@", action_ref)
-            self.assertRegex(action_ref.rsplit("@", 1)[1], r"^[0-9a-f]{40}$")
+            action, ref = action_ref.rsplit("@", 1)
+            self.assertIn(action, allowed)
+            self.assertRegex(ref, r"^[0-9a-f]{40}$")
 
     def test_repository_protection_files(self) -> None:
         for path in (
@@ -73,11 +76,52 @@ class RepositoryTests(unittest.TestCase):
             "SECURITY.md",
             "RESPONSIBLE_USE.md",
             "TRADEMARKS.md",
+            "docs/RELEASE_PROCESS.md",
         ):
             self.assertTrue((ROOT / path).is_file(), path)
         pr_template = (ROOT / ".github/pull_request_template.md").read_text(encoding="utf-8")
         self.assertIn("I have the right to submit", pr_template)
         self.assertIn("submitted under the Apache License 2.0", pr_template)
+
+    def test_version_and_plugin_metadata_are_aligned(self) -> None:
+        version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        plugin = json.loads((ROOT / ".claude-plugin/plugin.json").read_text(encoding="utf-8"))
+        marketplace = json.loads((ROOT / ".claude-plugin/marketplace.json").read_text(encoding="utf-8"))
+        entry = marketplace["plugins"][0]
+
+        self.assertEqual("https://json.schemastore.org/claude-code-plugin-manifest.json", plugin["$schema"])
+        self.assertEqual(version, plugin["version"])
+        self.assertEqual(version, marketplace["version"])
+        self.assertEqual(version, entry["version"])
+        self.assertEqual("./", entry["source"])
+        self.assertIs(entry["strict"], True)
+        self.assertNotIn("skills", plugin)
+        self.assertNotIn("skills", entry)
+
+        badge_version = "v" + version.replace("-", "--")
+        for readme in ("README.md", "README.zh-CN.md", "README.ja.md"):
+            text = (ROOT / readme).read_text(encoding="utf-8")
+            self.assertIn(badge_version, text)
+            self.assertIn("/reload-plugins", text)
+
+    def test_markdown_links_resolve(self) -> None:
+        link_pattern = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+        broken = []
+        for path in ROOT.rglob("*.md"):
+            text = path.read_text(encoding="utf-8")
+            for target in link_pattern.findall(text):
+                target = target.strip().split("#", 1)[0]
+                if not target or target.startswith(("http://", "https://", "mailto:")):
+                    continue
+                resolved = (path.parent / target).resolve()
+                try:
+                    resolved.relative_to(ROOT.resolve())
+                except ValueError:
+                    broken.append(f"{path.relative_to(ROOT)} -> {target}")
+                    continue
+                if not resolved.exists():
+                    broken.append(f"{path.relative_to(ROOT)} -> {target}")
+        self.assertEqual([], broken)
 
 
 if __name__ == "__main__":
