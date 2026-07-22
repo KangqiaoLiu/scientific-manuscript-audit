@@ -10,6 +10,8 @@ English | [简体中文](README.zh-CN.md) | [日本語](README.ja.md)
 
 Scientific Manuscript Audit helps authors and research teams examine manuscripts before submission or revision. It produces referee-style reports organized around claim burden, inspected evidence, defect recoverability, bounded resolutions, and coherent publication recommendations.
 
+> **Scope:** This project is intended for author-owned, public, or explicitly authorized materials used in pre-submission and revision quality control. It is not a substitute for human peer review or editorial judgment. Confidential third-party submissions must not be processed without explicit permission under the applicable journal, institutional, and confidentiality policies.
+
 ## What makes the audit distinctive
 
 The skill follows a traceable decision chain:
