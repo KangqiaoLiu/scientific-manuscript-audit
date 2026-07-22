@@ -8,6 +8,7 @@ All notable changes are recorded in this file.
 
 - repository checks for version synchronization and Claude Code plugin metadata
 - pre-publication compatibility and exposure audit
+- prominent author-side scope guidance in all README translations
 
 ### Changed
 
@@ -15,6 +16,7 @@ All notable changes are recorded in this file.
 - removed duplicate component declarations from the Claude Code marketplace entry
 - updated pinned GitHub Actions to the current checkout and setup-python v6 releases
 - clarified Claude Code CLI activation instructions in all README translations
+- clarified that the project supports pre-submission and revision quality control and does not replace human peer review or editorial judgment
 
 ## [0.1.0-rc.2] - 2026-07-22
 
