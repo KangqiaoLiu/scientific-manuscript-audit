@@ -5,6 +5,7 @@ This checklist defines the minimum integrity controls for an official release.
 ## 1. Prepare the release commit
 
 - start from the current `main` branch
+- submit release changes through a pull request; direct updates to `main` are blocked by repository rules
 - confirm that the working tree contains only intended release changes
 - synchronize `VERSION`, `CHANGELOG.md`, `CITATION.cff`, plugin metadata, README badges, and distribution packages
 - run:
