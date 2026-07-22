@@ -2,6 +2,20 @@
 
 All notable changes are recorded in this file.
 
+## [0.1.0-rc.3] - 2026-07-22
+
+### Added
+
+- repository checks for version synchronization and Claude Code plugin metadata
+- pre-publication compatibility and exposure audit
+
+### Changed
+
+- aligned the Claude Code plugin manifest with the current manifest schema and default skill discovery
+- removed duplicate component declarations from the Claude Code marketplace entry
+- updated pinned GitHub Actions to the current checkout and setup-python v6 releases
+- clarified Claude Code CLI activation instructions in all README translations
+
 ## [0.1.0-rc.2] - 2026-07-22
 
 ### Added
