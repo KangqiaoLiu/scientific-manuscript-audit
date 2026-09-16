@@ -12,7 +12,17 @@ Scientific Manuscript Audit 帮助论文作者与研究团队在投稿或修订�
 
 > **使用范围：** 本项目用于作者自有、已经公开或已明确授权材料的投稿前与修订质量控制。它不替代人类同行评审或编辑判断。未经相关期刊、机构和保密规则明确允许，不得处理保密的第三方投稿材料。
 
-## 它的核心特点
+## ✨ v0.2.0 有什么新变化
+
+- 🧭 **运行时结构更精炼。** 按照当前 OpenAI Agent Skills 指南重写 canonical skill，采用更短、更聚焦的 instruction-first 结构，减少不必要的 prompt 负担。
+- 🔎 **更强调独立、证据优先的核查。** 审查从权威稿件包出发，先重构真正被证据支持的最强贡献，再分别检查技术正确性、创新性、科学意义与投稿匹配度。
+- 🧩 **加入 OpenAI 接口元数据。** 新增 `agents/openai.yaml`，为 OpenAI/Codex 环境提供 display metadata 与默认 prompt。
+- 🧪 **运行时分发更干净。** 行为测试规范不再放入 runtime skill 目录；完整 routing、atomic 与 composite 评测仍保留在 `evals/` 中。
+- 🔗 **保持向后兼容。** skill 名称、仓库地址、canonical 安装路径以及 Claude Code plugin 身份均未改变。
+
+完整版本记录见 [CHANGELOG.md](CHANGELOG.md)。
+
+## 🧭 它的核心特点
 
 该技能采用一条可追踪的审查链：
 
@@ -34,7 +44,7 @@ Scientific Manuscript Audit 帮助论文作者与研究团队在投稿或修订�
 
 - **修订稿与回复信审查。** 是否解决问题以修订后的稿件和支撑证据为准；回复信用于定位修改位置和作者声称已经解决的事项。
 
-## 审查内容
+## 🔬 审查内容
 
 - 中心主张及其证明责任
 - 技术正确性与内部一致性
@@ -46,7 +56,7 @@ Scientific Manuscript Audit 帮助论文作者与研究团队在投稿或修订�
 - 主要意见与最终投稿建议之间的一致性
 - 文献、计算和外部事实的核验状态
 
-## 安装
+## 📦 安装
 
 ### Codex
 
@@ -82,7 +92,7 @@ mkdir -p ~/.claude/skills
 cp -R skills/scientific-manuscript-audit ~/.claude/skills/
 ```
 
-## 使用方式
+## 🚀 使用方式
 
 以下类型的请求会触发该技能：
 
@@ -105,7 +115,7 @@ cp -R skills/scientific-manuscript-audit ~/.claude/skills/
 
 用户也可以要求采用期刊审稿表、编号式审稿报告、修订矩阵、回复信审查或简洁初筛等格式。
 
-## 合成示例
+## 🧪 合成示例
 
 一篇稿件声称可以预测两个耦合单元中哪一个会先进入热失控。其方法分别比较两个单元在整个模拟区间内达到的最大指标值。实际结果中，一个单元更早越过阈值，另一个单元在更晚时间达到更大的峰值。
 
@@ -122,11 +132,11 @@ cp -R skills/scientific-manuscript-audit ~/.claude/skills/
 
 更多内容见[完整合成示例](examples/README.md)，其中包括完整的主张—证据主要意见和修订闭环示例。
 
-## 可处理的材料
+## 📚 可处理的材料
 
 在宿主 agent 能够访问相应文件的前提下，该技能可处理论文正文、LaTeX 源码、PDF、图、表、补充材料、代码、审稿意见、作者回复以及修订文件。报告会说明实际检查了哪些材料，以及哪些事项仍未得到验证。
 
-## 评测
+## ✅ 评测
 
 仓库包含：
 
@@ -140,7 +150,7 @@ cp -R skills/scientific-manuscript-audit ~/.claude/skills/
 
 详见[评测协议](docs/EVALUATION.md)、[合成案例设计](docs/CASE_DESIGN.md)和[评测规则](evals/rubric.md)。
 
-## 负责任使用
+## 🛡️ 负责任使用
 
 本项目适用于作者本人拥有、已经公开或已经明确授权处理的材料。未公开的第三方投稿、正式期刊审稿任务以及仅限编辑查看的材料，需要遵守相关期刊、机构和保密协议的授权要求。
 
@@ -148,11 +158,11 @@ cp -R skills/scientific-manuscript-audit ~/.claude/skills/
 
 完整规则见[负责任使用说明](RESPONSIBLE_USE.md)。
 
-## 免责声明
+## ⚠️ 免责声明
 
 Scientific Manuscript Audit 提供结构化科研稿件分析支持。其报告属于建议性判断，可能包含错误、遗漏或不完整结论。用户仍需自行核实技术主张、计算、参考文献、来源访问情况、保密要求、期刊政策、披露义务以及所有投稿或编辑决定。正式同行评审和编辑决定权属于相应期刊、会议、编辑和审稿人。
 
-## 仓库结构
+## 🗂️ 仓库结构
 
 ```text
 skills/scientific-manuscript-audit/  规范版本的技能文件
@@ -167,15 +177,15 @@ docs/                               设计与评测文档
 
 持续集成会检查生成的分发包是否与规范版本保持一致。
 
-## 参与贡献
+## 🤝 参与贡献
 
 欢迎提交可复现测试案例、校准规则、文档和跨平台兼容性改进。公开测试材料必须为合成材料或具有明确再分发权的材料。详见[贡献指南](CONTRIBUTING.md)。
 
-## 引用
+## 📖 引用
 
 软件引用元数据见 [CITATION.cff](CITATION.cff)。
 
-## 许可证
+## ⚖️ 许可证
 
 Copyright 2026 Kangqiao Liu.
 
