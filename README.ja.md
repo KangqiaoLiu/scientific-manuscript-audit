@@ -12,7 +12,17 @@ Scientific Manuscript Audit は、著者や研究チームが投稿前または�
 
 > **対象範囲：** 本プロジェクトは、著者自身が所有する資料、公開資料、または明示的に処理許可を得た資料を用いた投稿前・改訂時の品質管理を目的としています。人間による査読や編集判断を代替するものではありません。機密扱いの第三者投稿原稿は、該当するジャーナル、機関、および秘密保持方針に基づく明示的な許可なしに処理してはなりません。
 
-## この監査の特徴
+## ✨ v0.2.0 の主な変更点
+
+- 🧭 **ランタイム設計を簡潔化。** 現行の OpenAI Agent Skills ガイダンスに沿って canonical skill を再設計し、より短く instruction-first な構成にして不要な prompt 負荷を減らしました。
+- 🔎 **証拠優先の独立監査を強化。** 権威ある原稿パッケージから出発し、証拠が実際に支える最も強い貢献を再構成したうえで、技術的妥当性、新規性、科学的意義、投稿先適合性を独立に確認します。
+- 🧩 **OpenAI インターフェース metadata を追加。** `agents/openai.yaml` を追加し、OpenAI/Codex 環境向けの display metadata と default prompt を提供します。
+- 🧪 **ランタイム配布物を整理。** 行動テスト仕様を runtime skill フォルダから外し、完全な routing・atomic・composite 評価セットは引き続き `evals/` に保持します。
+- 🔗 **後方互換性を維持。** skill 名、リポジトリ URL、canonical インストールパス、Claude Code plugin identity は変更していません。
+
+完全なリリース履歴は [CHANGELOG.md](CHANGELOG.md) を参照してください。
+
+## 🧭 この監査の特徴
 
 本スキルは、次の追跡可能な意思決定チェーンに沿って原稿を監査します。
 
@@ -34,7 +44,7 @@ Scientific Manuscript Audit は、著者や研究チームが投稿前または�
 
 - **改訂稿と回答書の監査。** 問題が解決されたかどうかは改訂稿と補助証拠から判断し、回答書は変更箇所と解決主張を追跡するために使用します。
 
-## 監査対象
+## 🔬 監査対象
 
 - 中心主張とその立証責任
 - 技術的妥当性と内部整合性
@@ -46,7 +56,7 @@ Scientific Manuscript Audit は、著者や研究チームが投稿前または�
 - 主要所見と最終判断の整合性
 - 文献、計算、外部事実の検証状態
 
-## インストール
+## 📦 インストール
 
 ### Codex
 
@@ -82,7 +92,7 @@ mkdir -p ~/.claude/skills
 cp -R skills/scientific-manuscript-audit ~/.claude/skills/
 ```
 
-## 使用例
+## 🚀 使用例
 
 以下のような原稿評価依頼でスキルが起動します。
 
@@ -105,7 +115,7 @@ Assess technical validity, novelty positioning, journal fit, and the appropriate
 
 必要に応じて、投稿フォーム形式、番号付き査読レポート、改訂マトリクス、回答書監査、短いトリアージ形式にも対応します。
 
-## 合成例
+## 🧪 合成例
 
 ある原稿が、結合した二つのセルのうち、どちらが先に熱暴走へ入るかを予測できると主張しているとします。手法は、各セルが全シミュレーション期間に到達した最大指標を比較します。しかし、一方のセルが先にしきい値を超え、もう一方が後からより大きな最大値に達しています。
 
@@ -122,11 +132,11 @@ Recommendation impact: the first-event claim remains unsupported until recompute
 
 完全な claim-to-evidence コメントと改訂解決例は、[Worked Synthetic Examples](examples/README.md) を参照してください。
 
-## 入力可能な資料
+## 📚 入力可能な資料
 
 ホストエージェントがアクセス可能な場合、本スキルは原稿本文、LaTeX ソース、PDF、図、表、補足資料、コード、査読コメント、回答書、改訂ファイルを扱えます。レポートには、確認した資料と未解決の検証項目を明示します。
 
-## 評価資産
+## ✅ 評価資産
 
 リポジトリには以下が含まれます。
 
@@ -140,7 +150,7 @@ Recommendation impact: the first-event claim remains unsupported until recompute
 
 詳細は [Evaluation Protocol](docs/EVALUATION.md)、[Synthetic Case Design](docs/CASE_DESIGN.md)、[Evaluation Rubric](evals/rubric.md) を参照してください。
 
-## 責任ある利用
+## 🛡️ 責任ある利用
 
 本プロジェクトは、著者自身が所有する資料、公開資料、または明示的に処理許可を得た資料を対象としています。未公開の第三者投稿原稿、正式な査読依頼、編集者専用資料を処理する場合は、関連するジャーナル、機関、契約、秘密保持条件に従って許可を確認してください。
 
@@ -148,11 +158,11 @@ Recommendation impact: the first-event claim remains unsupported until recompute
 
 詳細は [Responsible Use](RESPONSIBLE_USE.md) を参照してください。
 
-## 免責事項
+## ⚠️ 免責事項
 
 Scientific Manuscript Audit は、科学論文評価のための構造化された分析支援を提供します。生成されたレポートには、誤り、見落とし、不完全な判断が含まれる可能性があります。技術的主張、計算、参考文献、情報源へのアクセス、秘密保持要件、投稿先の方針、開示義務、および投稿・編集上の最終判断については、利用者が検証と責任を負います。正式な査読および編集権限は、該当するジャーナル、会議、編集者、査読者にあります。
 
-## リポジトリ構成
+## 🗂️ リポジトリ構成
 
 ```text
 skills/scientific-manuscript-audit/  正式なスキル定義
@@ -167,15 +177,15 @@ docs/                               設計および評価文書
 
 生成済みパッケージは、継続的インテグレーションで正式なスキル定義との一致を検証します。
 
-## コントリビューション
+## 🤝 コントリビューション
 
 再現可能なテストケース、重大度校正規則、文書、クロスプラットフォーム互換性に関する貢献を歓迎します。公開テストへの貢献には、合成資料または再配布可能な資料を使用してください。詳細は [CONTRIBUTING.md](CONTRIBUTING.md) を参照してください。
 
-## 引用
+## 📖 引用
 
 ソフトウェア引用用メタデータは [CITATION.cff](CITATION.cff) にあります。
 
-## ライセンス
+## ⚖️ ライセンス
 
 Copyright 2026 Kangqiao Liu.
 
