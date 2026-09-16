@@ -12,14 +12,17 @@ TARGETS = [
     ROOT / "dist" / "codex" / "scientific-manuscript-audit",
     ROOT / "dist" / "claude-code" / "scientific-manuscript-audit",
 ]
-FILES = ["SKILL.md", "TESTS.md"]
+FILES = ["SKILL.md", "agents/openai.yaml"]
 
 
 def sync() -> None:
     for target in TARGETS:
         target.mkdir(parents=True, exist_ok=True)
         for name in FILES:
-            shutil.copy2(SOURCE / name, target / name)
+            src = SOURCE / name
+            dst = target / name
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
 
 
 def check() -> bool:

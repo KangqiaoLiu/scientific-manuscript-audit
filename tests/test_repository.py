@@ -14,6 +14,10 @@ class RepositoryTests(unittest.TestCase):
         self.assertTrue(text.startswith("---\n"))
         self.assertIn("name: scientific-manuscript-audit", text)
         self.assertIn("description:", text)
+        self.assertFalse((ROOT / "skills/scientific-manuscript-audit/TESTS.md").exists())
+        metadata = (ROOT / "skills/scientific-manuscript-audit/agents/openai.yaml").read_text(encoding="utf-8")
+        self.assertIn('display_name: "Scientific Manuscript Audit"', metadata)
+        self.assertIn("$scientific-manuscript-audit", metadata)
 
     def test_trigger_count_and_labels(self) -> None:
         rows = [json.loads(line) for line in (ROOT / "evals/trigger_cases.jsonl").read_text(encoding="utf-8").splitlines()]
@@ -38,11 +42,12 @@ class RepositoryTests(unittest.TestCase):
         canonical = ROOT / "skills/scientific-manuscript-audit"
         for host in ("codex", "claude-code"):
             target = ROOT / "dist" / host / "scientific-manuscript-audit"
-            for name in ("SKILL.md", "TESTS.md"):
+            for name in ("SKILL.md", "agents/openai.yaml"):
                 self.assertEqual(
                     (canonical / name).read_bytes(),
                     (target / name).read_bytes(),
                 )
+            self.assertFalse((target / "TESTS.md").exists())
 
     def test_no_macos_artifacts(self) -> None:
         bad = []

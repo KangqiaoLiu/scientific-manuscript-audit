@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scientific Manuscript Audit"
+  short_description: "Audit scientific manuscripts against their evidence"
+  default_prompt: "Use $scientific-manuscript-audit to assess this manuscript's strongest supported contribution, technical validity, novelty, significance, journal fit, and decision-relevant revision needs."
