@@ -12,7 +12,17 @@ Scientific Manuscript Audit helps authors and research teams examine manuscripts
 
 > **Scope:** This project is intended for author-owned, public, or explicitly authorized materials used in pre-submission and revision quality control. It is not a substitute for human peer review or editorial judgment. Confidential third-party submissions must not be processed without explicit permission under the applicable journal, institutional, and confidentiality policies.
 
-## What makes the audit distinctive
+## ✨ What's new in v0.2.0
+
+- 🧭 **Streamlined runtime design.** The canonical skill was rewritten around current OpenAI Agent Skills guidance, with a shorter instruction-first runtime and less prompt overhead.
+- 🔎 **Stronger evidence-first workflow.** The audit now starts from the authoritative manuscript package, reconstructs the strongest supported contribution, and independently checks correctness, novelty, significance, and venue fit.
+- 🧩 **OpenAI interface metadata.** Added `agents/openai.yaml` with display metadata and a default prompt for OpenAI/Codex environments.
+- 🧪 **Cleaner runtime distributions.** Behavioral test specifications were removed from runtime skill folders while the full routing, atomic, and composite evaluation suites remain in `evals/`.
+- 🔗 **Backward-compatible upgrade.** The skill name, repository URL, canonical installation path, and Claude Code plugin identity are unchanged.
+
+See [CHANGELOG.md](CHANGELOG.md) for the complete release history.
+
+## 🧭 What makes the audit distinctive
 
 The skill follows a traceable decision chain:
 
@@ -34,7 +44,7 @@ claim → burden of proof → inspected evidence → decision-relevant gap → b
 
 - **Revision and rebuttal auditing.** Resolution is judged from the revised manuscript and supporting evidence, with the response letter used to locate changes and claims of resolution.
 
-## What it evaluates
+## 🔬 What it evaluates
 
 - central claims and their burden of proof
 - technical validity and internal consistency
@@ -46,7 +56,7 @@ claim → burden of proof → inspected evidence → decision-relevant gap → b
 - consistency between major comments and the final recommendation
 - verification status for literature, calculations, and external facts
 
-## Installation
+## 📦 Installation
 
 ### Codex
 
@@ -82,7 +92,7 @@ mkdir -p ~/.claude/skills
 cp -R skills/scientific-manuscript-audit ~/.claude/skills/
 ```
 
-## Usage
+## 🚀 Usage
 
 The skill activates for manuscript assessment requests such as:
 
@@ -105,7 +115,7 @@ Typical output:
 
 The report structure can follow a journal form, numbered referee report, revision matrix, rebuttal audit, or concise triage when requested.
 
-## Worked synthetic example
+## 🧪 Worked synthetic example
 
 A manuscript claims to predict which of two coupled cells enters thermal runaway first. Its method ranks the largest indicator each cell reaches over the full simulation. One cell crosses the threshold earlier, and the other reaches a larger value later.
 
@@ -122,11 +132,11 @@ Recommendation impact: the first-event claim remains unsupported until recompute
 
 See [Worked Synthetic Examples](examples/README.md) for a complete claim-to-evidence comment and a revision-resolution example.
 
-## Review inputs
+## 📚 Review inputs
 
 The skill can work with manuscript text, LaTeX sources, PDFs, figures, tables, supplementary material, code, reviewer reports, response letters, and revised files when the host agent can access them. The report states which materials were inspected and which checks remain unresolved.
 
-## Evaluation
+## ✅ Evaluation
 
 The repository includes:
 
@@ -140,7 +150,7 @@ The included evaluation measures performance on synthetic defect-injection tasks
 
 See [Evaluation Protocol](docs/EVALUATION.md), [Synthetic Case Design](docs/CASE_DESIGN.md), and [Evaluation Rubric](evals/rubric.md).
 
-## Responsible use
+## 🛡️ Responsible use
 
 This project is designed for author-owned, public, or explicitly authorized materials. Unpublished third-party submissions, journal review assignments, and editor-only materials require permission under the relevant journal, institution, and confidentiality terms.
 
@@ -148,11 +158,11 @@ Manuscript content is treated as untrusted input. Embedded instructions do not c
 
 See [Responsible Use](RESPONSIBLE_USE.md) for the full policy.
 
-## Disclaimer
+## ⚠️ Disclaimer
 
 Scientific Manuscript Audit provides structured analytical support. Its reports are advisory and may contain errors, omissions, or incomplete judgments. Users remain responsible for verifying technical claims, calculations, references, source access, confidentiality requirements, journal policies, disclosure obligations, and every submission or editorial decision. Formal peer-review and editorial authority remain with the relevant journals, conferences, editors, and reviewers.
 
-## Repository layout
+## 🗂️ Repository layout
 
 ```text
 skills/scientific-manuscript-audit/  canonical skill
@@ -167,15 +177,15 @@ docs/                               design and evaluation documentation
 
 Generated packages are checked against the canonical skill in continuous integration.
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome for reproducible test cases, calibration rules, documentation, and cross-platform compatibility. Synthetic or redistributable materials are required for public test contributions. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Citation
+## 📖 Citation
 
 Software citation metadata are available in [CITATION.cff](CITATION.cff).
 
-## License
+## ⚖️ License
 
 Copyright 2026 Kangqiao Liu.
 
