@@ -2,6 +2,25 @@
 
 All notable changes are recorded in this file.
 
+## [0.2.0] - 2026-09-16
+
+### Added
+
+- OpenAI `agents/openai.yaml` interface metadata for the canonical skill and generated distributions
+- explicit full-package audit guidance for figures, code/data, supplements, rendered documents, cover letters, and submission metadata when relevant
+
+### Changed
+
+- rewrote the runtime skill around an instruction-first workflow aligned with current OpenAI Agent Skills guidance
+- strengthened independent reconstruction of the strongest supported contribution before judging correctness, novelty, significance, or venue fit
+- made prior referee reports and response letters contextual evidence rather than substitutes for direct verification
+- preserved the project-specific claim-to-evidence chain, recoverability-calibrated severity, bounded resolutions, and recommendation coherence while removing unnecessary fixed-output structure
+- updated Codex and Claude Code distributions to ship only runtime-relevant skill files
+
+### Removed
+
+- `TESTS.md` from the canonical runtime skill and generated host distributions; behavioral evaluation remains in the repository `evals/` suite
+
 ## [0.1.0] - 2026-07-22
 
 ### Added
