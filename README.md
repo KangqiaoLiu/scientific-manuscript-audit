@@ -8,6 +8,12 @@ English | [简体中文](README.zh-CN.md) | [日本語](README.ja.md)
 [![Version](https://img.shields.io/badge/version-v0.2.0-blue.svg)](CHANGELOG.md)
 [![Validation](https://github.com/KangqiaoLiu/scientific-manuscript-audit/actions/workflows/validate.yml/badge.svg)](.github/workflows/validate.yml)
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/claim-flow-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="docs/claim-flow-light.svg">
+  <img alt="Claim-centered manuscript audit flow" src="docs/claim-flow-light.svg">
+</picture>
+
 Scientific Manuscript Audit helps authors and research teams examine manuscripts before submission or revision. It produces referee-style reports organized around claim burden, inspected evidence, defect recoverability, bounded resolutions, and coherent publication recommendations.
 
 > **Scope:** This project is intended for author-owned, public, or explicitly authorized materials used in pre-submission and revision quality control. It is not a substitute for human peer review or editorial judgment. Confidential third-party submissions must not be processed without explicit permission under the applicable journal, institutional, and confidentiality policies.
