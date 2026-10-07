@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="220" viewBox="0 0 1000 220" role="img" aria-labelledby="title desc">
+  <title id="title">Claim-centered audit flow</title>
+  <desc id="desc">The audit proceeds from a manuscript claim through burden of proof, evidence, decision-relevant gap, bounded resolution, and recommendation.</desc>
+  <rect width="1000" height="220" rx="18" fill="#0d1117"/>
+  <text x="38" y="42" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="19" font-weight="650" fill="#f0f6fc">Claim-centered audit flow</text>
+  <text x="38" y="66" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="12.5" fill="#8b949e">A recommendation should be traceable to the evidence that actually supports or blocks a manuscript's central claims.</text>
+  <rect x="38" y="88" width="138" height="86" rx="14" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+    <text x="107" y="120" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#f0f6fc">Claim</text>
+    <text x="107" y="143" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="10.5" fill="#8b949e">What is being asserted</text>
+    <path d="M 176 131 L 193 131" stroke="#30363d" stroke-width="2"/><path d="M 188 126 L 193 131 L 188 136" fill="none" stroke="#30363d" stroke-width="2"/><rect x="196" y="88" width="138" height="86" rx="14" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+    <text x="265" y="120" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#f0f6fc">Burden</text>
+    <text x="265" y="143" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="10.5" fill="#8b949e">What evidence would make it credible</text>
+    <path d="M 334 131 L 351 131" stroke="#30363d" stroke-width="2"/><path d="M 346 126 L 351 131 L 346 136" fill="none" stroke="#30363d" stroke-width="2"/><rect x="354" y="88" width="138" height="86" rx="14" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+    <text x="423" y="120" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#f0f6fc">Evidence</text>
+    <text x="423" y="143" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="10.5" fill="#8b949e">What was actually inspected</text>
+    <path d="M 492 131 L 509 131" stroke="#30363d" stroke-width="2"/><path d="M 504 126 L 509 131 L 504 136" fill="none" stroke="#30363d" stroke-width="2"/><rect x="512" y="88" width="138" height="86" rx="14" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+    <text x="581" y="120" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#f0f6fc">Gap</text>
+    <text x="581" y="143" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="10.5" fill="#8b949e">What remains decision-relevant</text>
+    <path d="M 650 131 L 667 131" stroke="#30363d" stroke-width="2"/><path d="M 662 126 L 667 131 L 662 136" fill="none" stroke="#30363d" stroke-width="2"/><rect x="670" y="88" width="138" height="86" rx="14" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+    <text x="739" y="120" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#f0f6fc">Resolution</text>
+    <text x="739" y="143" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="10.5" fill="#8b949e">What bounded fix would close the gap</text>
+    <path d="M 808 131 L 825 131" stroke="#30363d" stroke-width="2"/><path d="M 820 126 L 825 131 L 820 136" fill="none" stroke="#30363d" stroke-width="2"/><rect x="828" y="88" width="138" height="86" rx="14" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+    <text x="897" y="120" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#f0f6fc">Recommendation</text>
+    <text x="897" y="143" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="10.5" fill="#8b949e">How does that change the decision</text>
+    
+</svg>
